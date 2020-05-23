@@ -2,6 +2,8 @@
 
 public class Blade : MonoBehaviour
 {
+    bool isCutting = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -19,11 +21,11 @@ public class Blade : MonoBehaviour
 
     void StartCutting()
     {
-
+        isCutting = true;
     }
 
     void StopCutting()
     {
-        
+        isCutting = false;
     }
 }
