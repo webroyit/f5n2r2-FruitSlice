@@ -4,6 +4,17 @@ public class Blade : MonoBehaviour
 {
     bool isCutting = false;
 
+    // Access the Rigidbody2D component on Unity
+    // Make sure to add Rigidbody2D component on the Blade object
+    // Also set the Body Type in Rigidbody2D component to Kinematic to prevent it from falling
+    Rigidbody2D rb;
+
+    void Start()
+    {
+        // Get the reference to Rigidbody2D
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     // Update is called once per frame
     void Update()
     {
