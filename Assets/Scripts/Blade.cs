@@ -2,7 +2,12 @@
 
 public class Blade : MonoBehaviour
 {
+    // Note: Drag and drop BladeTrail prefab to this
+    public GameObject bladeTrailPrefab;
+
     bool isCutting = false;
+
+    GameObject currentBladeTrail;
 
     // Access the Rigidbody2D component on Unity
     // Make sure to add Rigidbody2D component on the Blade object
@@ -52,10 +57,16 @@ public class Blade : MonoBehaviour
     void StartCutting()
     {
         isCutting = true;
+
+        // Add BladeTrail prefab to a parent Blade object
+        currentBladeTrail = Instantiate(bladeTrailPrefab, transform);
     }
 
     void StopCutting()
     {
         isCutting = false;
+
+        // Remove BladeTrail prefab from the parent Blade object
+        currentBladeTrail.transform.SetParent(null);
     }
 }
