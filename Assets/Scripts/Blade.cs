@@ -66,7 +66,10 @@ public class Blade : MonoBehaviour
     {
         isCutting = false;
 
-        // Remove BladeTrail prefab from the parent Blade object
+        // Stop the showing of BladeTrail prefab
         currentBladeTrail.transform.SetParent(null);
+
+        // Remove BladeTrail prefab from the parent Blade object in 2 second
+        Destroy(currentBladeTrail, 2f);
     }
 }
