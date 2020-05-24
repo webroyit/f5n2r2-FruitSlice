@@ -9,8 +9,14 @@ public class Blade : MonoBehaviour
     // Also set the Body Type in Rigidbody2D component to Kinematic to prevent it from falling
     Rigidbody2D rb;
 
+    // Access the Carmera on Unity
+    Camera cam;
+
     void Start()
     {
+        // Get the reference to Camera
+        cam = Camera.main;
+
         // Get the reference to Rigidbody2D
         rb = GetComponent<Rigidbody2D>();
     }
@@ -28,6 +34,19 @@ public class Blade : MonoBehaviour
         {
             StopCutting();
         }
+
+        if(isCutting)
+        {
+            // Move the pointer
+            UpdateCut();
+        }
+    }
+
+    void UpdateCut()
+    {
+        // This is in screen coordinates
+        // ScreenToWorldPoint to make the corrdinates the same as
+        rb.position = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void StartCutting()
