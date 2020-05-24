@@ -17,6 +17,8 @@ public class Blade : MonoBehaviour
     // Access the Carmera on Unity
     Camera cam;
 
+    CircleCollider2D circleCollider;
+
     void Start()
     {
         // Get the reference to Camera
@@ -24,6 +26,9 @@ public class Blade : MonoBehaviour
 
         // Get the reference to Rigidbody2D
         rb = GetComponent<Rigidbody2D>();
+
+        // Get the reference to CircleCollider2D
+        circleCollider = GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
@@ -60,6 +65,8 @@ public class Blade : MonoBehaviour
 
         // Add BladeTrail prefab to a parent Blade object
         currentBladeTrail = Instantiate(bladeTrailPrefab, transform);
+
+        circleCollider.enabled = true;
     }
 
     void StopCutting()
@@ -71,5 +78,7 @@ public class Blade : MonoBehaviour
 
         // Remove BladeTrail prefab from the parent Blade object in 2 second
         Destroy(currentBladeTrail, 2f);
+
+        circleCollider.enabled = false;
     }
 }
