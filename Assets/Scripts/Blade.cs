@@ -9,7 +9,7 @@ public class Blade : MonoBehaviour
 
     bool isCutting = false;
 
-    Vector2 previosPosition;
+    Vector2 previousPosition;
 
     GameObject currentBladeTrail;
 
@@ -65,7 +65,7 @@ public class Blade : MonoBehaviour
 
         // Get the distance travel over time
         // Time.deltaTime to prevent the velocity from changing because of framerate
-        float velocity = (newPosition - previosPosition).magnitude * Time.deltaTime;
+        float velocity = (newPosition - previousPosition).magnitude * Time.deltaTime;
 
         // To check if there is enough velocity to cut the fruit
         if(velocity > minCuttingVelocity)
@@ -76,7 +76,7 @@ public class Blade : MonoBehaviour
             circleCollider.enabled = false;
         }
 
-        previosPosition = newPosition;
+        previousPosition = newPosition;
     }
 
     void StartCutting()
@@ -85,6 +85,9 @@ public class Blade : MonoBehaviour
 
         // Add BladeTrail prefab to a parent Blade object
         currentBladeTrail = Instantiate(bladeTrailPrefab, transform);
+
+        // Reset the position
+        previousPosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
         circleCollider.enabled = false;
     }
