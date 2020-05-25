@@ -7,6 +7,8 @@ public class Blade : MonoBehaviour
 
     bool isCutting = false;
 
+    Vector2 previosPosition;
+
     GameObject currentBladeTrail;
 
     // Access the Rigidbody2D component on Unity
@@ -55,8 +57,12 @@ public class Blade : MonoBehaviour
     void UpdateCut()
     {
         // This is in screen coordinates
-        // ScreenToWorldPoint to make the corrdinates the same as
-        rb.position = cam.ScreenToWorldPoint(Input.mousePosition);
+        // ScreenToWorldPoint to make the corrdinates the same as mouse position
+        Vector2 newPosition = cam.ScreenToWorldPoint(Input.mousePosition);
+        rb.position = newPosition;
+
+        // Get the distance travel over time
+        float velocity = (newPosition - previosPosition).magnitude;
     }
 
     void StartCutting()
