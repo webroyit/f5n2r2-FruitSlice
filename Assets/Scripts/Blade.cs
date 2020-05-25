@@ -5,6 +5,8 @@ public class Blade : MonoBehaviour
     // Note: Drag and drop BladeTrail prefab to this
     public GameObject bladeTrailPrefab;
 
+    public float minCuttingVelocity = .001f;
+
     bool isCutting = false;
 
     Vector2 previosPosition;
@@ -62,7 +64,19 @@ public class Blade : MonoBehaviour
         rb.position = newPosition;
 
         // Get the distance travel over time
-        float velocity = (newPosition - previosPosition).magnitude;
+        // Time.deltaTime to prevent the velocity from changing because of framerate
+        float velocity = (newPosition - previosPosition).magnitude * Time.deltaTime;
+
+        // To check if there is enough velocity to cut the fruit
+        if(velocity > minCuttingVelocity)
+        {
+            circleCollider.enabled = true;
+        }else
+        {
+            circleCollider.enabled = false;
+        }
+
+        previosPosition = newPosition;
     }
 
     void StartCutting()
@@ -72,7 +86,7 @@ public class Blade : MonoBehaviour
         // Add BladeTrail prefab to a parent Blade object
         currentBladeTrail = Instantiate(bladeTrailPrefab, transform);
 
-        circleCollider.enabled = true;
+        circleCollider.enabled = false;
     }
 
     void StopCutting()
